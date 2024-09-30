@@ -11,13 +11,13 @@ val settings = object : TxniTemplateSettings {
 			{
 				deps.modImplementation(modrinth("sodium", "mc1.21-0.6.0-beta.2-fabric"))
 				deps.modImplementation(modrinth("reeses-sodium-options", "mc1.21.1-1.8.0-beta.3+fabric"))
-				deps.include(deps.implementation(deps.annotationProcessor("com.bawnorton.mixinsquared:mixinsquared-fabric:0.2.0-beta.6")!!)!!)
+				deps.include(deps.implementation(deps.annotationProcessor("com.github.bawnorton:mixinsquared-fabric:0.2.0-beta.6")!!)!!)
 			}
 			else
 			{
 				deps.modImplementation(modrinth("sodium", "mc1.20.1-0.5.11"))
 				deps.modImplementation(modrinth("reeses-sodium-options", "mc1.20.1-1.7.2"))
-				deps.include(deps.implementation(deps.annotationProcessor("com.bawnorton.mixinsquared:mixinsquared-fabric:0.2.0-beta.6")!!)!!)
+				deps.include(deps.implementation(deps.annotationProcessor("com.github.bawnorton:mixinsquared-fabric:0.2.0-beta.6")!!)!!)
 			}
 		}
 
@@ -42,7 +42,7 @@ val settings = object : TxniTemplateSettings {
 			//deps.runtimeOnly(modrinth("sodium-extra", "mc1.21.1-0.6.0-beta.3+neoforge"))
 			//deps.runtimeOnly(modrinth("iris", "1.8.0-beta.3+1.21-neoforge"))
 
-			deps.compileOnly(deps.annotationProcessor("com.bawnorton.mixinsquared:mixinsquared-common:0.2.0-beta.6")!!)
+			deps.compileOnly(deps.annotationProcessor("com.github.bawnorton:mixinsquared-common:0.2.0-beta.6")!!)
 			deps.include(deps.implementation(deps.annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-neoforge:0.2.0-beta.6")!!)!!)
 		}
 	}
