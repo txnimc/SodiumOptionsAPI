@@ -21,10 +21,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 #if AFTER_21_1
 import net.minecraft.server.packs.PackLocationInfo;
@@ -110,7 +108,8 @@ public class TabHeaderWidget extends FlatButtonWidget {
                     .orElse(ResourcePackLoader.getPackFor("forge").
                             orElseThrow(()->new RuntimeException("Can't find forge, WHAT!")));
             try {
-                IoSupplier<InputStream> logoResource = resourcePack.getRootResource(logoFile.get());
+                var paths = Arrays.stream(logoFile.get().split("/")).map(s -> s.toLowerCase()).toArray(String[]::new);
+                IoSupplier<InputStream> logoResource = resourcePack.getRootResource(paths);
                 if (logoResource != null) {
                     NativeImage logo = NativeImage.read(logoResource.get());
                     if(logo.getWidth() != logo.getHeight()) {
@@ -127,7 +126,8 @@ public class TabHeaderWidget extends FlatButtonWidget {
             #else
             final Pack.ResourcesSupplier supplier = ResourcePackLoader.getPackFor(modId).orElse(ResourcePackLoader.getPackFor("neoforge").orElseThrow(()->new RuntimeException("Can't find neoforge, WHAT!")));
             try(PackResources pack = supplier.openPrimary(new PackLocationInfo("mod:" + modId, Component.empty(), PackSource.BUILT_IN, Optional.empty()))) {
-                IoSupplier<InputStream> logoResource = pack.getRootResource(logoFile.get().split("/"));
+                var paths = Arrays.stream(logoFile.get().split("/")).map(s -> s.toLowerCase()).toArray(String[]::new);
+                IoSupplier<InputStream> logoResource = pack.getRootResource(paths);
                 if (logoResource != null) {
                     NativeImage logo = NativeImage.read(logoResource.get());
                     if(logo.getWidth() != logo.getHeight()) {

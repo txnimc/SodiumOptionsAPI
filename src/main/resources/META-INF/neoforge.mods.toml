@@ -7,7 +7,7 @@ issueTrackerURL = "https://github.com/${github}/${name}/issues"
 
 [[mods]]
 modId="${id}"
-version="${version}"
+version="${modversion}"
 displayName="${display_name}"
 authors="${author}"
 description="${description}"
@@ -21,5 +21,12 @@ config = "mixins.${id}.json"
 modId="minecraft"
 mandatory=true
 versionRange="${mc}"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies."${id}"]]
+modId="reeses_sodium_options"
+mandatory=true
+versionRange="*"
 ordering="NONE"
 side="BOTH"

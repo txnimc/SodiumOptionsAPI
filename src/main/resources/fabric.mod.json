@@ -2,7 +2,7 @@
 	"schemaVersion": 1,
 	"id": "${id}",
 	"name": "${display_name}",
-	"version": "${version}",
+	"version": "${modversion}",
 	"description": "${description}",
 	"authors": [
 		"${author}"
@@ -13,7 +13,7 @@
 	},
 	"license": "${license}",
 	"icon": "assets/${namespace}/textures/mod_logo.png",
-	"environment": "*",
+	"environment": "client",
 	"mixins": [
 		"mixins.${id}.json"
 	],
@@ -28,7 +28,8 @@
 	"depends": {
 		"fabricloader": ">=0.15.0",
 		"minecraft": "${mc}",
-		"fabric-api": "*"
+		"fabric-api": "*",
+		"reeses_sodium_options": "*"
 	},
 	"accessWidener": "${id}-${mcVersion}.accesswidener"
 }

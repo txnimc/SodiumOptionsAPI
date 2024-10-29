@@ -3,15 +3,14 @@
   "package": "toni.sodiumoptionsapi.mixin",
   "compatibilityLevel": "JAVA_17",
   "minVersion": "0.8",
-  "mixins": [
-    "sodium.FlatButtonWidgetAccessor",
-    "sodium.FlatButtonWidgetOffsetMixin",
-    "sodium.ReesesVideoOptionsScreenMixin"
-  ],
+  "mixins": [ ],
   "injectors": {
     "defaultRequire": 1
   },
   "client": [
+    "sodium.FlatButtonWidgetAccessor",
+    "sodium.FlatButtonWidgetOffsetMixin",
+    "sodium.ReesesVideoOptionsScreenMixin",
     "sodium.OptionGroupBuilderMixin",
     "sodium.OptionGroupMixin",
     "sodium.OptionPageMixin",

@@ -9,6 +9,9 @@ val settings = object : TxniTemplateSettings {
 		override fun addFabric(deps: DependencyHandlerScope) {
 			if (mcVersion == "1.21.1")
 			{
+				deps.modRuntimeOnly(modrinth("moreculling", "UncAG2fS"))
+				deps.modRuntimeOnly(modrinth("cloth-config", "15.0.140+fabric"))
+				deps.runtimeOnly("me.fallenbreath:conditional-mixin-fabric:0.6.3")
 				deps.modImplementation(modrinth("sodium", "mc1.21-0.6.0-beta.2-fabric"))
 				deps.modImplementation(modrinth("reeses-sodium-options", "mc1.21.1-1.8.0-beta.3+fabric"))
 				deps.include(deps.implementation(deps.annotationProcessor("com.bawnorton.mixinsquared:mixinsquared-fabric:0.2.0-beta.6")!!)!!)
@@ -136,6 +139,8 @@ repositories {
 	maven("https://maven.parchmentmc.org")
 	maven("https://maven.su5ed.dev/releases")
 	maven("https://maven.bawnorton.com/releases")
+	maven("https://maven.lostluma.net/releases")
+	maven("https://maven.fallenbreath.me/releases")
 }
 
 dependencies {
@@ -260,7 +265,7 @@ tasks.processResources {
 //	inputs.property("mc", mod.mcDep)
 
 	val map = mapOf(
-		"version" to mod.version,
+		"modversion" to mod.version,
 		"mc" to mod.mcDep,
 		"mcVersion" to mcVersion,
 		"id" to mod.id,
