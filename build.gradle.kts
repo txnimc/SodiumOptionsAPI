@@ -12,8 +12,8 @@ val settings = object : TxniTemplateSettings {
 				deps.modRuntimeOnly(modrinth("moreculling", "UncAG2fS"))
 				deps.modRuntimeOnly(modrinth("cloth-config", "15.0.140+fabric"))
 				deps.runtimeOnly("me.fallenbreath:conditional-mixin-fabric:0.6.3")
-				deps.modImplementation(modrinth("sodium", "mc1.21-0.6.0-beta.2-fabric"))
-				deps.modImplementation(modrinth("reeses-sodium-options", "mc1.21.1-1.8.0-beta.3+fabric"))
+				deps.modImplementation(modrinth("sodium", "mc1.21.1-0.6.0-fabric"))
+				deps.modImplementation(modrinth("reeses-sodium-options", "mc1.21.3-1.8.0+fabric"))
 				deps.include(deps.implementation(deps.annotationProcessor("com.bawnorton.mixinsquared:mixinsquared-fabric:0.2.0-beta.6")!!)!!)
 			}
 			else
@@ -34,8 +34,8 @@ val settings = object : TxniTemplateSettings {
 		}
 
 		override fun addNeo(deps: DependencyHandlerScope) {
-			deps.implementation(modrinth("sodium", "mc1.21-0.6.0-beta.2-neoforge"))
-			deps.implementation(modrinth("reeses-sodium-options", "mc1.21.1-1.8.0-beta.3+neoforge"))
+			deps.implementation(modrinth("sodium", "mc1.21.1-0.6.0-neoforge"))
+			deps.implementation(modrinth("reeses-sodium-options", "mc1.21.3-1.8.0+neoforge"))
 
 			deps.compileOnly("org.sinytra.forgified-fabric-api:fabric-api-base:0.4.42+d1308dedd1")
 			deps.compileOnly("org.sinytra.forgified-fabric-api:fabric-renderer-api-v1:3.4.0+acb05a39d1")

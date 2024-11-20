@@ -84,10 +84,10 @@ public class OptionPageMixin implements IOptionGroupIdAccessor {
             id = OptionIdGenerator.generateId(name.getString());
         }
         if(id != null) {
-            SodiumOptionsAPI.LOGGER.debug("Guessed ID for legacy OptionPage '{}': {}", name.getString(), id);
+            SodiumOptionsAPI.LOGGER.debug("Guessed ID for legacy OptionPage: '{}': {}", name.getString(), id);
             return id;
         } else {
-            SodiumOptionsAPI.LOGGER.warn("Id must be specified in OptionPage '{}'", name.getString());
+            SodiumOptionsAPI.LOGGER.warn("Id must be specified in OptionPage: '{}'", name.getString());
             return sodiumOptionsAPI$DEFAULT_ID;
         }
     }

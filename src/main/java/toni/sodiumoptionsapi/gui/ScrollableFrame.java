@@ -80,13 +80,13 @@ public class ScrollableFrame extends AbstractFrame {
         }
 
         if (this.canScrollHorizontal) {
-            this.horizontalScrollBar = new ScrollBarComponent(new Dim2i(this.viewPortDimension.x(), this.viewPortDimension.getLimitY() + 1, this.viewPortDimension.width(), 10), ScrollBarComponent.Mode.HORIZONTAL, this.frame.dim.width(), this.viewPortDimension.width(), offset -> {
+            this.horizontalScrollBar = new ScrollBarComponent(new Dim2i(this.viewPortDimension.x(), this.viewPortDimension.getLimitY() + 1, this.viewPortDimension.width(), 10), ScrollBarComponent. #if AFTER_21_1 ScrollDirection #else Mode #endif .HORIZONTAL, this.frame.dim.width(), this.viewPortDimension.width(), offset -> {
                 horizontalScrollBarOffset.set(offset);
             });
             this.horizontalScrollBar.setOffset(horizontalScrollBarOffset.get());
         }
         if (this.canScrollVertical) {
-            this.verticalScrollBar = new ScrollBarComponent(new Dim2i(this.viewPortDimension.getLimitX() + 1, this.viewPortDimension.y(), 8, this.viewPortDimension.height()), ScrollBarComponent.Mode.VERTICAL, this.frame.dim.height(), this.viewPortDimension.height(), offset -> {
+            this.verticalScrollBar = new ScrollBarComponent(new Dim2i(this.viewPortDimension.getLimitX() + 1, this.viewPortDimension.y(), 8, this.viewPortDimension.height()), ScrollBarComponent. #if AFTER_21_1 ScrollDirection #else Mode #endif .VERTICAL, this.frame.dim.height(), this.viewPortDimension.height(), offset -> {
                 verticalScrollBarOffset.set(offset);
             }, this.viewPortDimension);
             this.verticalScrollBar.setOffset(verticalScrollBarOffset.get());
@@ -108,11 +108,19 @@ public class ScrollableFrame extends AbstractFrame {
         this.controlElements.clear();
 
         if (this.canScrollHorizontal) {
-            this.horizontalScrollBar.updateThumbPosition();
+            #if AFTER_21_1
+            this.verticalScrollBar.updateThumbLocation();
+            #else
+            this.verticalScrollBar.updateThumbPosition();
+            #endif
         }
 
         if (this.canScrollVertical) {
+            #if AFTER_21_1
+            this.verticalScrollBar.updateThumbLocation();
+            #else
             this.verticalScrollBar.updateThumbPosition();
+            #endif
         }
 
         this.frame.buildFrame();
