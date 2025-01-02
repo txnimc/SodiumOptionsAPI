@@ -7,6 +7,7 @@ import net.caffeinemc.mods.sodium.api.util.ColorARGB;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.SimpleTexture;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -96,27 +97,37 @@ public class ReesesVideoOptionsScreenMixin  {
 
         var color = ColorARGB.pack(115,197,95);
         //ths.renderBackground(gfx, mouseX, mouseY, delta);
+        #if mc < 214
         gfx.setColor((float) ColorARGB.unpackRed(color) / 255.0F, (float)ColorARGB.unpackGreen(color) / 255.0F, (float)ColorARGB.unpackBlue(color) / 255.0F, 0.8F);
+        #endif
         RenderSystem.disableDepthTest();
         RenderSystem.depthMask(false);
         RenderSystem.enableBlend();
         RenderSystem.blendFunc(770, 1);
+
+        #if mc >= 214
+        gfx.blit(RenderType::guiTextured, LOGO_LOCATION, this.sodiumOptionsAPI$logoDim.x(), this.sodiumOptionsAPI$logoDim.y(), this.sodiumOptionsAPI$logoDim.width(), this.sodiumOptionsAPI$logoDim.height(), 0, 0, 256, 256, 256, 256, ColorARGB.pack(115,197,95, 204));
+        #else
         gfx.blit(LOGO_LOCATION, this.sodiumOptionsAPI$logoDim.x(), this.sodiumOptionsAPI$logoDim.y(), this.sodiumOptionsAPI$logoDim.width(), this.sodiumOptionsAPI$logoDim.height(), 0.0F, 0.0F, 256, 256, 256, 256);
+        #endif
+
         RenderSystem.defaultBlendFunc();
         RenderSystem.disableBlend();
         RenderSystem.depthMask(true);
         RenderSystem.enableDepthTest();
+        #if mc < 214
         gfx.setColor(1.0F, 1.0F, 1.0F, 1.0F);
+        #endif
+
         #endif
     }
 
     #if FORGE
     @Redirect(method = "parentBasicFrameBuilder", at = @At(value = "INVOKE", ordinal = 2, target = "Lorg/embeddedt/embeddium/gui/frame/BasicFrame$Builder;addChild(Ljava/util/function/Function;)Lorg/embeddedt/embeddium/gui/frame/BasicFrame$Builder;"), remap = false)
     #else
-    @Redirect(method = "parentBasicFrameBuilder", at = @At(value = "INVOKE", ordinal = 2, target = "Lme/flashyreese/mods/reeses_sodium_options/client/gui/frame/BasicFrame$Builder;addChild(Ljava/util/function/Function;)Lme/flashyreese/mods/reeses_sodium_options/client/gui/frame/BasicFrame$Builder;"), remap = false)
+    @Redirect(method = "parentBasicFrameBuilder", at = @At(value = "INVOKE", ordinal = #if mc >= 214 0 #else 2 #endif, target = "Lme/flashyreese/mods/reeses_sodium_options/client/gui/frame/BasicFrame$Builder;addChild(Ljava/util/function/Function;)Lme/flashyreese/mods/reeses_sodium_options/client/gui/frame/BasicFrame$Builder;"), remap = false)
     #endif
     private BasicFrame.Builder tabFrameBuilder(BasicFrame.Builder instance, Function<Dim2i, AbstractWidget> function, @Local(ordinal = 1, argsOnly = true) Dim2i tabFrameDim) {
-
         instance.addChild((parentDim) -> SodiumOptionsTabFrame.createBuilder()
                 .setDimension(tabFrameDim)
                 .shouldRenderOutline(false)

@@ -4,7 +4,6 @@ import com.google.common.collect.ImmutableListMultimap;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.MultimapBuilder;
 
-import com.mojang.blaze3d.shaders.Shader;
 import net.caffeinemc.mods.sodium.api.util.ColorARGB;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;

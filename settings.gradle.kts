@@ -10,6 +10,7 @@ pluginManagement {
 		maven("https://maven.neoforged.net/releases/")
 		maven("https://maven.kikugie.dev/snapshots")
 		maven("https://maven.kikugie.dev/releases")
+		maven("https://maven.txni.dev/releases")
 	}
 }
 
@@ -27,6 +28,7 @@ extensions.configure<StonecutterSettings> {
 
 		mc("1.20.1", "fabric" , "forge")
 		mc("1.21.1", "fabric" , "neoforge")
+		mc("1.21.4", "fabric" , "neoforge")
 	}
 	create(rootProject)
 }

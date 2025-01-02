@@ -31,5 +31,5 @@
 		"fabric-api": "*",
 		"reeses-sodium-options": "*"
 	},
-	"accessWidener": "${id}-${mcVersion}.accesswidener"
+	"accessWidener": "${id}.accesswidener"
 }

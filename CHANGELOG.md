@@ -1,1 +1,1 @@
-Updated to Sodium 0.6 release
+Add some extension methods for manually overriding category IDs

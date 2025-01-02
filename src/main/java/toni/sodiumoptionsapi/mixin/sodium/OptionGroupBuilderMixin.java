@@ -8,6 +8,7 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import toni.sodiumoptionsapi.api.ExtendedOptionGroup;
 import toni.sodiumoptionsapi.api.OptionGroupConstruction;
 import toni.sodiumoptionsapi.api.OptionIdentifier;
 
@@ -22,7 +23,7 @@ import me.jellysquid.mods.sodium.client.gui.options.OptionGroup;
 #endif
 
 @Mixin(OptionGroup.Builder.class)
-public class OptionGroupBuilderMixin {
+public class OptionGroupBuilderMixin implements ExtendedOptionGroup {
 
     @Shadow @Final private List<Option<?>> options;
 

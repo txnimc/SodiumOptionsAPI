@@ -24,6 +24,10 @@ import java.nio.file.Path;
 import java.util.*;
 import java.util.stream.Collectors;
 
+#if mc >= 214
+import net.minecraft.client.renderer.RenderType;
+#endif
+
 #if AFTER_21_1
 import net.minecraft.server.packs.PackLocationInfo;
 import net.caffeinemc.mods.sodium.client.gui.widgets.FlatButtonWidget;
@@ -180,6 +184,6 @@ public class TabHeaderWidget extends FlatButtonWidget {
         ResourceLocation icon = Objects.requireNonNullElse(this.logoTexture, FALLBACK_LOCATION);
         int fontHeight = Minecraft.getInstance().font.lineHeight;
         int imgY = ((FlatButtonWidgetAccessor)this).getDim().getCenterY() - (fontHeight / 2) ;
-        drawContext.blit(icon, ((FlatButtonWidgetAccessor)this).getDim().x() + 5, imgY, 0.0f, 0.0f, fontHeight, fontHeight, fontHeight, fontHeight);
+        drawContext.blit(#if mc >= 214 RenderType::guiTextured, #endif icon, ((FlatButtonWidgetAccessor)this).getDim().x() + 5, imgY, 0.0f, 0.0f, fontHeight, fontHeight, fontHeight, fontHeight);
     }
 }

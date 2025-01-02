@@ -3,6 +3,7 @@ package toni.sodiumoptionsapi.mixin.sodium;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.contents.TranslatableContents;
+import net.minecraft.resources.ResourceLocation;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -45,7 +46,7 @@ public class OptionPageMixin implements IOptionGroupIdAccessor {
         sodiumOptionsAPI$id = sodiumOptionsAPI$tryMakeId(name);
     }
     #else
-    @Inject(method = "<init>", at = @At(unsafe = true, value = "INVOKE", target = "Lcom/google/common/collect/ImmutableList;builder()Lcom/google/common/collect/ImmutableList$Builder;"))
+    @Inject(method = "<init>", at = @At(value = "INVOKE", target = "Lcom/google/common/collect/ImmutableList;builder()Lcom/google/common/collect/ImmutableList$Builder;"))
     public void onInit(Component name, ImmutableList<OptionGroup> groups, CallbackInfo ci) {
         this.groups = sodiumOptionsAPI$collectExtraGroups(groups);
         sodiumOptionsAPI$id = sodiumOptionsAPI$tryMakeId(name);
@@ -67,6 +68,15 @@ public class OptionPageMixin implements IOptionGroupIdAccessor {
             return sodiumOptionsAPI$DEFAULT_ID;
 
         return sodiumOptionsAPI$id;
+    }
+    @Override
+    public void sodiumOptionsAPI$setId(OptionIdentifier<Void> id) {
+        sodiumOptionsAPI$id = id;
+    }
+
+    @Override
+    public void sodiumOptionsAPI$setId(ResourceLocation id) {
+        sodiumOptionsAPI$id = OptionIdentifier.create(id);
     }
 
     @Unique
