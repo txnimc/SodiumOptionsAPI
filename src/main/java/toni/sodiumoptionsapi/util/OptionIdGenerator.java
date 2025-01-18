@@ -24,9 +24,29 @@ import net.fabricmc.loader.api.metadata.ModOrigin;
 #endif
 
 public class OptionIdGenerator {
-    private static final List<String> BLACKLISTED_PREFIXES = List.of("toni.sodiumoptionsapi", "net.caffeinemc.mods.sodium", "me.jellysquid.mods.sodium", "org.embeddedt.embeddium", "net.minecraft", "net.neoforged");
+    private static final List<String> BLACKLISTED_PREFIXES = List.of(
+        "toni.sodiumoptionsapi",
+        "net.caffeinemc.mods.sodium",
+        "me.jellysquid.mods.sodium",
+        "org.embeddedt.embeddium",
+        "net.minecraft",
+        "net.neoforged"
+    );
+
+    private static final List<String> BLACKLISTED_PACKAGES = List.of(
+        "flashback",
+        "moulberry",
+        "dynamic_fps",
+        "axiom"
+    );
 
     private static boolean isAllowedClass(String name) {
+        for (String packageName : BLACKLISTED_PACKAGES) {
+            if (name.contains(packageName)) {
+                return false;
+            }
+        }
+
         for(String prefix : BLACKLISTED_PREFIXES) {
             if(name.startsWith(prefix)) {
                 return false;

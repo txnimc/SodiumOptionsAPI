@@ -125,7 +125,7 @@ public class ReesesVideoOptionsScreenMixin  {
     #if FORGE
     @Redirect(method = "parentBasicFrameBuilder", at = @At(value = "INVOKE", ordinal = 2, target = "Lorg/embeddedt/embeddium/gui/frame/BasicFrame$Builder;addChild(Ljava/util/function/Function;)Lorg/embeddedt/embeddium/gui/frame/BasicFrame$Builder;"), remap = false)
     #else
-    @Redirect(method = "parentBasicFrameBuilder", at = @At(value = "INVOKE", ordinal = #if mc >= 214 0 #else 2 #endif, target = "Lme/flashyreese/mods/reeses_sodium_options/client/gui/frame/BasicFrame$Builder;addChild(Ljava/util/function/Function;)Lme/flashyreese/mods/reeses_sodium_options/client/gui/frame/BasicFrame$Builder;"), remap = false)
+    @Redirect(method = "parentBasicFrameBuilder", at = @At(value = "INVOKE", ordinal = #if mc >= 211 0 #else 2 #endif, target = "Lme/flashyreese/mods/reeses_sodium_options/client/gui/frame/BasicFrame$Builder;addChild(Ljava/util/function/Function;)Lme/flashyreese/mods/reeses_sodium_options/client/gui/frame/BasicFrame$Builder;"), remap = false)
     #endif
     private BasicFrame.Builder tabFrameBuilder(BasicFrame.Builder instance, Function<Dim2i, AbstractWidget> function, @Local(ordinal = 1, argsOnly = true) Dim2i tabFrameDim) {
         instance.addChild((parentDim) -> SodiumOptionsTabFrame.createBuilder()

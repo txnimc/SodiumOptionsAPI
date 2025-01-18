@@ -22,7 +22,7 @@ val templateSettings = object : BlahajSettings {
 					deps.modRuntimeOnly(modrinth("moreculling", "UncAG2fS"))
 					deps.modRuntimeOnly(modrinth("cloth-config", "15.0.140+fabric"))
 					deps.runtimeOnly("me.fallenbreath:conditional-mixin-fabric:0.6.3")
-					deps.modImplementation(modrinth("reeses-sodium-options", "mc1.21.3-1.8.0+fabric"))
+					deps.modImplementation(modrinth("reeses-sodium-options", "mc1.21.4-1.8.3+fabric"))
 
 					deps.include(deps.implementation(deps.annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-fabric:0.2.0-beta.6")!!)!!)
 
