@@ -3,6 +3,7 @@ package toni.sodiumoptionsapi.mixin.sodium;
 import com.google.common.collect.Multimap;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.textures.TextureFormat;
 import net.caffeinemc.mods.sodium.api.util.ColorARGB;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -20,10 +21,12 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import toni.sodiumoptionsapi.SodiumOptionsAPI;
 import toni.sodiumoptionsapi.gui.SodiumOptionsTabFrame;
 import toni.sodiumoptionsapi.util.IOptionGroupIdAccessor;
 import toni.sodiumoptionsapi.util.PlatformUtil;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -72,15 +75,19 @@ public class ReesesVideoOptionsScreenMixin  {
     @Shadow @Final private List<OptionPage> pages;
     @Shadow private SearchTextFieldComponent searchTextField;
     @Shadow @Final private static AtomicReference<Component> tabFrameSelectedTab;
+
     @Unique
-    private static final ResourceLocation LOGO_LOCATION = #if AFTER_21_1 ResourceLocation.fromNamespaceAndPath #else new ResourceLocation #endif("sodiumoptionsapi", "textures/sodiumoptionsapi/gui/logo_transparent.png");
+    private static final ResourceLocation LOGO_LOCATION = #if AFTER_21_1 ResourceLocation.fromNamespaceAndPath #else new ResourceLocation #endif ("sodiumoptionsapi", "textures/sodiumoptionsapi/gui/logo_transparent.png");
+
     @Unique
     private Dim2i sodiumOptionsAPI$logoDim;
 
 
     @Inject(method = "<init>", at = @At("RETURN"))
     private void inject$registerTextures(Screen prev, List pages, CallbackInfo ci) {
-        Minecraft.getInstance().getTextureManager().register(LOGO_LOCATION, new SimpleTexture(LOGO_LOCATION));
+        #if mc < 215
+        Minecraft.getInstance().getTextureManager().register(LOGO_LOCATION, new SimpleTexture(SodiumOptionsAPI.LOGO_LOCATION));
+        #endif
     }
 
     @Inject(method = "parentFrameBuilder", at = @At(value = "RETURN"), remap = false)
@@ -100,6 +107,8 @@ public class ReesesVideoOptionsScreenMixin  {
         #if mc < 214
         gfx.setColor((float) ColorARGB.unpackRed(color) / 255.0F, (float)ColorARGB.unpackGreen(color) / 255.0F, (float)ColorARGB.unpackBlue(color) / 255.0F, 0.8F);
         #endif
+
+        #if mc < 215
         RenderSystem.disableDepthTest();
         RenderSystem.depthMask(false);
         RenderSystem.enableBlend();
@@ -115,6 +124,8 @@ public class ReesesVideoOptionsScreenMixin  {
         RenderSystem.disableBlend();
         RenderSystem.depthMask(true);
         RenderSystem.enableDepthTest();
+        #endif
+
         #if mc < 214
         gfx.setColor(1.0F, 1.0F, 1.0F, 1.0F);
         #endif

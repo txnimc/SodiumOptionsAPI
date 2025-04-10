@@ -101,7 +101,7 @@ public class TabHeaderWidget extends FlatButtonWidget {
                         throw new IOException("Logo " + logoFile.get() + " for " + modId + " is not square");
                     }
                     texture = #if AFTER_21_1 ResourceLocation.fromNamespaceAndPath #else new ResourceLocation #endif("sodium", "logo/" + modId);
-                    Minecraft.getInstance().getTextureManager().register(texture, new DynamicTexture(logo));
+                    Minecraft.getInstance().getTextureManager().register(texture, new DynamicTexture(#if mc >= 215 () -> modId, #endif logo));
                 }
             } catch(IOException e) {
                 erroredLogos.add(modId);
@@ -139,7 +139,7 @@ public class TabHeaderWidget extends FlatButtonWidget {
                         throw new IOException("Logo " + logoFile.get() + " for " + modId + " is not square");
                     }
                     texture = ResourceLocation.fromNamespaceAndPath("sodium", "logo/" + modId);
-                    Minecraft.getInstance().getTextureManager().register(texture, new DynamicTexture(logo));
+                    Minecraft.getInstance().getTextureManager().register(texture, new DynamicTexture(#if mc >= 215 () -> modId, #endif logo ));
                 }
             } catch(IOException e) {
                 erroredLogos.add(modId);
